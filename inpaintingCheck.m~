@@ -1,0 +1,12 @@
+pic = load('lena_1.mat');
+imshow(x,[0 255]);
+figure;
+imshow(mask,[0 1]);
+corrupted = x .* (ones(size(x))-mask);
+figure;
+imshow(corrupted,[0 255]);
+ inpainting(uint8(corrupted),mask);
+res = imread('InpaintingCycles/pic.jp2');
+figure;
+imshow(res,[0 255]);
+restored = res.* (ones(size(res))-mask);
