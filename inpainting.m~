@@ -1,0 +1,16 @@
+function [ restored ] = inpainting( corrupted, mask)
+%     prev = corrupted;
+%     for i=1:1:20,
+%         imwrite(prev,''InpaintingCycles/''
+%     end
+% 
+%     end
+    imshow(corrupted,[0 255]);
+    figure;
+    imshow(mask, [0 1]);
+    corrupted = corrupted *. (ones(size(corrupted))-mask);
+    figure;
+    imshow(corrupted, [0 255]);
+    %imwrite(corrupted,'InpaintingCycles/1',
+end
+
