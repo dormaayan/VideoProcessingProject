@@ -8,9 +8,6 @@ imshow(mask,[0 1]);
 result = inpainting(uint8(corrupted),mask);
  figure;
  imshow(result,[0 255]);
-% res = imread('InpaintingCycles/pic.jp2');
-% figure;
-% imshow(uint8(res),[0 255]);
-% restored = (uint8(res) .* uint8(zeros(size(res))+mask)) + uint8(corrupted);
-% figure;
-% imshow(uint8(restored),[0 255]);
+
+ fprintf('The Mse is: %d \n',immse(uint8(x),uint8(result)));
+  fprintf('The PSNR is: %d \n',psnr(uint8(x),uint8(result)));
