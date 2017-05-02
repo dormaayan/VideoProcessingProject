@@ -1,22 +1,44 @@
-passes = zeros(512,512);
+Horizontalpasses = zeros(512,512);
 for i=1:1:512
     for j=1:1:512
-        if mod(i,20)<10
-            passes(i,j)=1;
+        if mod(i,20)<5
+            Horizontalpasses(i,j)=1;
         end 
     end
 end
-imshow(passes,[0 1]);
+% figure;
+% imshow(Horizontalpasses,[0 1]);
 
- pic = load('lena_1.mat');
- figure;
- imshow(x,[0 255]);
+Verticalpasses = zeros(512,512);
+for i=1:1:512
+    for j=1:1:512
+        if mod(j,20)<5
+            Verticalpasses(i,j)=1;
+        end 
+    end
+end
+% figure;
+% imshow(Verticalpasses,[0 1]);
+
+
 % figure;
 % imshow(mask,[0 1]);
- corrupted = x .* (ones(size(x))-passes);
+
+ 
+noise = mask;
+
+
+pic = load('lena_1.mat');
+ figure;
+ imshow(x,[0 255]);
+ 
+  figure;
+ imshow(noise,[0 255]);
+
+ corrupted = x .* (ones(size(x))-noise);
  figure;
  imshow(corrupted,[0 255]);
-result = inpainting(uint8(corrupted),pa);
+result = inpainting(uint8(corrupted),noise);
  figure;
  imshow(result,[0 255]);
 

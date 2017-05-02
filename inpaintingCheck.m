@@ -6,8 +6,8 @@ for i=1:1:512
         end 
     end
 end
-figure;
-imshow(Horizontalpasses,[0 1]);
+% figure;
+% imshow(Horizontalpasses,[0 1]);
 
 Verticalpasses = zeros(512,512);
 for i=1:1:512
@@ -17,18 +17,30 @@ for i=1:1:512
         end 
     end
 end
-figure;
-imshow(Verticalpasses,[0 1]);
+% figure;
+% imshow(Verticalpasses,[0 1]);
 
- pic = load('lena_1.mat');
- figure;
- imshow(x,[0 255]);
+
 % figure;
 % imshow(mask,[0 1]);
- corrupted = x .* (ones(size(x))-Verticalpasses);
+
+%Uncomment Here Your Desired Pattern
+% pattern = Horizontalpasses;
+pattern = Verticalpasses;
+% pattern = mask;
+
+
+ load('barb_1.mat');
+ figure;
+ imshow(x,[0 255]);
+ 
+  figure;
+ imshow(pattern,[0 255]);
+
+ corrupted = x .* (ones(size(x))-pattern);
  figure;
  imshow(corrupted,[0 255]);
-result = inpainting(uint8(corrupted),Verticalpasses);
+result = inpainting(uint8(corrupted),pattern);
  figure;
  imshow(result,[0 255]);
 
