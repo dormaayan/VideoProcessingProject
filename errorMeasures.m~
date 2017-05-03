@@ -90,8 +90,7 @@ fclose(fid);
 % figure;
 % imshow(new_vid(:,:,111),[0 255]);
 
-figure;
-imshow(original(:,:,99)-new_vid(:,:,99));
+imshow
 
 
 

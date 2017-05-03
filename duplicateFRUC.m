@@ -7,7 +7,7 @@ function [ new_video ] = duplicateFRUC( video, ratio )
     counter = 1;
     frame = 1;
 
-    disp(original_frame_rate)
+%     disp(original_frame_rate)
     
     for i=1:1:new_frame_rate
         new_video( :, :, i) = video( :, :, frame);
@@ -19,6 +19,6 @@ function [ new_video ] = duplicateFRUC( video, ratio )
         end
     end
     
-    disp(frame)
+%     disp(frame)
 end
 
