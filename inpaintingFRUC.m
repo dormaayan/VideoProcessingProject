@@ -9,7 +9,7 @@ function [ new ] = inpaintingFRUC( original )
     mask = zeros(width,2*original_frame_rate);
     for i=1:1:width
     for j=1:1:2*original_frame_rate
-        if mod(i,2)<1
+        if mod(j,2)<1
             mask(i,j)=1;
         end 
     end
