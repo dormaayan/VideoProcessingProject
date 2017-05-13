@@ -91,7 +91,7 @@ fclose(fid);
 % imshow(new_vid(:,:,111),[0 255]);
 
 figure;
-imshow(original(:,:,99)-new_vid(:,:,99));
+imshow(original(:,:,99)-new_vid(:,:,99), [-255 255]);
 
 
 

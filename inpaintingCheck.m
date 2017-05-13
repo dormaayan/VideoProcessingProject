@@ -25,9 +25,9 @@ end
 % imshow(mask,[0 1]);
 
 %Uncomment Here Your Desired Pattern
-% pattern = Horizontalpasses;
-pattern = Verticalpasses;
-% pattern = mask;
+%pattern = Horizontalpasses;
+ pattern = Verticalpasses;
+ %pattern = mask;
 
 
  load('barb_1.mat');
