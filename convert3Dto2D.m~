@@ -1,9 +1,0 @@
-function [ new ] = convert3Dto2D( original )
-        [height,width,original_frame_rate] = size(original);
-        new = zeros(width,original_frame_rate);
-        for i=1:1:width,
-            for j=1
-            new(i,:) = original(1,i,:);
-        end
-end
-

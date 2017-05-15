@@ -1,4 +1,4 @@
-function [ new ] = inpaintingFRUC( original )
+function [ new ] = inpaintingFRUCHorizontal( original )
     [height,width,original_frame_rate] = size(original);
     new = zeros(height,width,2*original_frame_rate);
     %Copy the original frames to the new video
@@ -6,22 +6,18 @@ function [ new ] = inpaintingFRUC( original )
         new(:,:,2*i+1) = original(:,:,i+1);
     end
     
-    mask = zeros(width,2*original_frame_rate);
-    for i=1:1:width
+    mask = zeros(height,2*original_frame_rate);
+    for i=1:1:height
     for j=1:1:2*original_frame_rate
         if mod(j,2)<1
             mask(i,j)=1;
         end 
     end
     end
-    for i=1:1:height,
-        img = convert3Dto2D(new(i,:,:));
-        if i==100,
-            figure;
-            imshow(img,[0 255]);
-        end
-        inpainted = convert2Dto3D(inpainting(img,mask,1));
-        new(i,:,:) = inpainted(1,:,:);
+    for i=1:1:width,
+        img = convert3Dto2DHorizontal(new(:,i,:));
+        inpainted = convert2Dto3DHorizontal(inpainting(img,mask,1));
+        new(:,i,:) = inpainted(:,1,:);
     end
 
 
