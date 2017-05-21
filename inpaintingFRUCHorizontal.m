@@ -15,9 +15,9 @@ function [ new ] = inpaintingFRUCHorizontal( original )
     end
     end
     for i=1:1:width,
-        img = convert3Dto2DHorizontal(new(:,i,:));
-        inpainted = convert2Dto3DHorizontal(inpainting(img,mask,1));
-        new(:,i,:) = inpainted(:,1,:);
+        img = permute(new(:,i,:),[1 3 2]);
+        inpainted = inpainting(img,mask,1);
+        new(:,i,:) = inpainted;
     end
 
 

@@ -6,8 +6,8 @@ for i=1:2:300
 end
 filtered = original(:,:,2:2:300);
 % new_vid = averageFRUC(filtered);
-% new_inpainting_vid = inpaintingFRUCHorizontal(filtered);
-new_inpainting_vid = inpaintingFRUCVertical(filtered);
+ new_inpainting_vid = inpaintingFRUCHorizontal(filtered);
+% new_inpainting_vid = inpaintingFRUCVertical(filtered);
 figure;
 imshow(new_inpainting_vid(:,:,164),[0 254]);
 [mse,psnr]=errorsVideos(original,new_inpainting_vid,mask);
