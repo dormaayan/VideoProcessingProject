@@ -1,5 +1,5 @@
 function [ new ] = inpaintingFRUCAlternating( original )
-    myu = 2;
+    myu = 1;
     [height,width,original_frame_rate] = size(original);
     corrupted = zeros(height,width,2*original_frame_rate);
     %Copy the original frames to the new video
@@ -33,12 +33,24 @@ function [ new ] = inpaintingFRUCAlternating( original )
             img = permute(new(j,:,:),[2 3 1]);
             res = compressDecompress(img,i,max((2*myu)/beta,1));
             new(j,:,:) = (uint8(res) .* uint8(maskW)) + permute(uint8(corrupted(j,:,:)),[2 3 1]);
+%              if i==2 && j==100,
+%                 figure;
+%                 imshow(img,[0 255]);
+%                  figure;
+%                 imshow(permute(new(j,:,:),[2 3 1]),[0 255]);
+%             end
         end
         
        for j=1:1:width,
             img = permute(new(:,j,:),[1 3 2]);
             res = compressDecompress(img,i,max((2*myu)/beta,1));
             new(:,j,:) = (uint8(res) .* uint8(maskH)) + permute(uint8(corrupted(:,j,:)),[1 3 2]);
+            if i==40 && j==100,
+                figure;
+                imshow(img,[0 255]);
+                 figure;
+                imshow(permute(new(:,j,:),[1 3 2]),[0 255]);
+            end
        end
        
        beta = 1.1*beta;

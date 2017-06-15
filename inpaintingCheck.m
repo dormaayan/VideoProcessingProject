@@ -25,24 +25,32 @@ end
 % imshow(mask,[0 1]);
 
 %Uncomment Here Your Desired Pattern
-%pattern = Horizontalpasses;
- pattern = Verticalpasses;
- %pattern = mask;
+pattern = Horizontalpasses;
+%  pattern = Verticalpasses;
+% pattern = mask;
 
 
- load('barb_1.mat');
+ load('lena_1.mat');
  figure;
  imshow(x,[0 255]);
  
-  figure;
- imshow(pattern,[0 1]);
+%   figure;
+%  imshow(pattern,[0 1]);
 
  corrupted = x .* (ones(size(x))-pattern);
+%  figure;
+%  imshow(corrupted,[0 255]);
+result1 = inpainting(uint8(corrupted),pattern,2);
  figure;
- imshow(corrupted,[0 255]);
-result = inpainting(uint8(corrupted),pattern,1);
+ imshow(result1,[0 255]);
+result2 = inpaintingWithShifts(uint8(corrupted),pattern,2);
  figure;
- imshow(result,[0 255]);
-
- fprintf('The Mse is: %d \n',immse(uint8(x),uint8(result)));
-  fprintf('The PSNR is: %d \n',psnr(uint8(x),uint8(result)));
+ imshow(result2,[0 255]);
+ 
+ fprintf('No Shift \n');
+ fprintf('The Mse is: %d \n',immse(uint8(x),uint8(result1)));
+  fprintf('The PSNR is: %d \n',psnrM(uint8(x),result1));
+   
+ fprintf('With Shift \n');
+ fprintf('The Mse is: %d \n',immse(uint8(x),uint8(result2)));
+  fprintf('The PSNR is: %d \n',psnrM(uint8(x),result2));

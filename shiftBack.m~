@@ -1,0 +1,9 @@
+function [ reShifted ] = shiftBack(shifted,Nb,j,h,w)
+
+reShifted = zeros(h,w);
+row = uint16(j/sqrt(Nb));
+column = uint16(mod(j,sqrt(Nb)));
+re
+shifted = img((column+1):1:x,(row+1):1:y);
+end
+
