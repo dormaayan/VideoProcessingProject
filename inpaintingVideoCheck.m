@@ -12,7 +12,7 @@ filtered = original(:,:,2:2:300);
 % new_inpainting_vid = inpaintingFRUCAlternating(filtered);
 new_inpainting_vid = inpaintingFrucVideo( original, 50);
 figure;
-imshow(new_inpainting_vid(:,:,164),[0 254]);
+imshow(new_inpainting_vid(:,:,164),[0 255]);
 [mse,psnr]=errorsVideos(original,new_inpainting_vid,mask);
 fprintf('\n The Mse is: %d \n',mse);
 fprintf('\n The PSNR is: %d \n',psnr);

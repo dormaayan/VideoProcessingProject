@@ -9,7 +9,7 @@ saveVideo(temp_input_filename, mov, image_y, frames);
 
 temp_reconstructed_filename = sprintf( 'output%d.yuv', temp_number );
 
-[dontcare1, dontcare2] = system( sprintf('x265.exe --profile msp --input %s --input-res %dx%d --fps %d --frames %d --output %s --crf %d --no-info --rd 6', temp_input_filename, width, height, fps, frames, compressed_file, compression_QP ) );
+[dontcare1, dontcare2] = system( sprintf('x265.exe --profile main --input %s --input-res %dx%d --fps %d --frames %d --output %s --crf %d --no-info --rd 6', temp_input_filename, width, height, fps, frames, compressed_file, compression_QP ) );
 [dontcare1, dontcare2] = system( sprintf('ffmpeg.exe -i %s %s', compressed_file, temp_reconstructed_filename ) );
 
 %maybe delete input.yuv
