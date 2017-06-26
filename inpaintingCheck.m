@@ -25,9 +25,9 @@ end
 % imshow(mask,[0 1]);
 
 %Uncomment Here Your Desired Pattern
-pattern = Horizontalpasses;
+%pattern = Horizontalpasses;
 %  pattern = Verticalpasses;
-% pattern = mask;
+ pattern = mask;
 
 
  load('lena_1.mat');
@@ -49,8 +49,8 @@ result2 = inpaintingWithShifts(uint8(corrupted),pattern,2);
  
  fprintf('No Shift \n');
  fprintf('The Mse is: %d \n',immse(uint8(x),uint8(result1)));
-  fprintf('The PSNR is: %d \n',psnrM(uint8(x),result1));
+  fprintf('The PSNR is: %d \n',psnr(uint8(x),uint8(result1),255));
    
  fprintf('With Shift \n');
  fprintf('The Mse is: %d \n',immse(uint8(x),uint8(result2)));
-  fprintf('The PSNR is: %d \n',psnrM(uint8(x),result2));
+  fprintf('The PSNR is: %d \n',psnr(uint8(x),uint8(result2),255));
