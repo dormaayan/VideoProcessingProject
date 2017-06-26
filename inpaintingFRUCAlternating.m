@@ -1,11 +1,7 @@
 function [ new ] = inpaintingFRUCAlternating( original )
     myu = 1;
     [height,width,original_frame_rate] = size(original);
-    corrupted = zeros(height,width,2*original_frame_rate);
-    %Copy the original frames to the new video
-    for i=0:1:original_frame_rate-1
-        corrupted(:,:,2*i+1) = original(:,:,i+1);
-    end
+    corrupted = averageFRUC(original);
     
     maskW = zeros(width,2*original_frame_rate);
     for i=1:1:width

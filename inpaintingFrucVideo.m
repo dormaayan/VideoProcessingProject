@@ -17,6 +17,7 @@ function [ new ] = inpaintingFrucVideo( original, fps)
        mov(i) = mov_struct; 
     end
     for i=0:1:49*3,
+       disp(i);
        res = hevc_x265_video_compression_decompression(uint8(prev), mov,51 - floor(i/3), 'inpaintedMovie',fps,frames);
        prev = (uint8(res) .* uint8(mask)) + uint8(corrupted);
     end

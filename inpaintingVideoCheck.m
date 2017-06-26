@@ -1,17 +1,18 @@
 fprintf('\n ~~~~~~~Analyzing Tv Video~~~~~~~ \n');
 [original,imp] = loadVideo('Videos/tv.yuv',176,144,300);
 original = uint8(original);
-mask = zeros([1,300]);
+mask = zeros(300);
 for i=1:2:300
     mask(i)=1;
 end
 filtered = original(:,:,2:2:300);
-% new_vid = averageFRUC(filtered);
-%  new_inpainting_vid = inpaintingFRUCHorizontal(filtered);
+ %new_inpainting_vid = averageFRUC(filtered);
+ % new_inpainting_vid = duplicateFRUC(filtered,2);
+ new_inpainting_vid = inpaintingFRUCHorizontal(filtered);
 % new_inpainting_vid = inpaintingFRUCVertical(filtered);
 % new_inpainting_vid = inpaintingFRUCAlternating(filtered);
 %new_inpainting_vid = inpaintingFrucVideo( original, 50);
-new_inpainting_vid = inpaintingFrucVideoWithAverageStart( original, 50);
+%new_inpainting_vid = inpaintingFrucVideoWithAverageStart( original, 50);
 figure;
 imshow(new_inpainting_vid(:,:,164),[0 255]);
 [mse,psnr]=errorsVideos(original,new_inpainting_vid,mask);

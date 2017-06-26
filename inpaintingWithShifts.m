@@ -11,7 +11,7 @@ function [ restored ] = inpaintingWithShifts( corrupted, mask ,myu)
          sum = sum + shiftBack(res,Nb,j,h,w);
          count = count + shiftBack(shift(ones(h,w),Nb,j),Nb,j,h,w);
        end
-       prev = (uint8(sum./count) .* uint8(mask)) + uint8(corrupted);
+       prev = (uint8(sum./count) .* uint8(mask)) + (uint8(corrupted).*uint8(1-mask));
        beta = 1.1*beta;
     end
     restored = prev;

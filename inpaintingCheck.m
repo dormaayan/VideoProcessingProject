@@ -1,3 +1,4 @@
+load('lena_1.mat');
 Horizontalpasses = zeros(512,512);
 for i=1:1:512
     for j=1:1:512
@@ -29,8 +30,6 @@ end
 %  pattern = Verticalpasses;
  pattern = mask;
 
-
- load('lena_1.mat');
  figure;
  imshow(x,[0 255]);
  
