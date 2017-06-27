@@ -1,4 +1,4 @@
-function [ new ] = inpaintingFRUCHorizontal( original, comparison, mask )
+function [ new ] = inpaintingFRUCHorizontal( original, comparison, frames_mask )
     [height,width,original_frame_rate] = size(original);
     new = averageFRUC(original);
     
@@ -12,8 +12,8 @@ function [ new ] = inpaintingFRUCHorizontal( original, comparison, mask )
     end
     beta = 0.3;
     myu = 3;
-    itr = 100;
-    mses = zeros(itr);
+    itr = 10;
+    mses = zeros([itr,1]);
     for i=1:1:itr,
        disp(i);
        for j=1:1:width,
@@ -21,7 +21,7 @@ function [ new ] = inpaintingFRUCHorizontal( original, comparison, mask )
         res = compressDecompress(uint8(img),i,max((2*myu)/beta,1));
         new(:,j,:) = (uint8(res) .* uint8(mask)) + (uint8(img) .* uint8(1-mask));
        end
-       mses(i) = errorVideos(comparison, mses, mask);
+       mses(i) = errorsVideos(comparison, new, frames_mask);
        beta = 1.1*beta;
     end 
     plot(mses);
