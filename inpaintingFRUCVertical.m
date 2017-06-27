@@ -1,4 +1,4 @@
-function [ new ] = inpaintingFRUCVertical( original )
+function [ new ] = inpaintingFRUCVertical( original , comparison, frames_mask)
     [height,width,original_frame_rate] = size(original);
     new = averageFRUC(original);
     
@@ -10,13 +10,27 @@ function [ new ] = inpaintingFRUCVertical( original )
         end 
     end
     end
-    for i=1:1:height,
-        disp(i);
-        img = permute(new(i,:,:),[2 3 1]);
-        inpainted = inpainting(img,mask,1);
-        new(i,:,:) = inpainted;
-    end
-
-
+    beta = 0.3;
+    myu = 3;
+    itr = 10;
+    [mses(1),psnrs(1)] = errorsVideos(comparison, new, frames_mask);
+    figure;
+    hold on;
+    line = plot(mses);
+    for i=1:1:itr,
+       disp(i);
+       for j=1:1:height,
+        img = permute(new(j,:,:),[2 3 1]);
+        res = compressDecompress(uint8(img),i,max((2*myu)/beta,1));
+        new(j,:,:) = (uint8(res) .* uint8(mask)) + (uint8(img) .* uint8(1-mask));
+       end
+       [mses(i+1),psnrs(i+1)] = errorsVideos(comparison, new, frames_mask);
+       delete(line);
+       line = plot(mses);
+       drawnow();
+       beta = 1.1*beta;
+    end 
+    figure;
+    plot(psnrs);
 end
 
