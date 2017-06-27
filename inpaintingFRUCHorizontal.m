@@ -13,9 +13,11 @@ function [ new ] = inpaintingFRUCHorizontal( original, comparison, frames_mask )
     beta = 0.3;
     myu = 3;
     itr = 10;
-    mses = zeros([itr,1]);
+    mses = 0;
     psnrs = zeros([itr,1]);
-
+    figure;
+    hold on;
+    line = plot(mses);
     for i=1:1:itr,
        disp(i);
        for j=1:1:width,
@@ -24,10 +26,11 @@ function [ new ] = inpaintingFRUCHorizontal( original, comparison, frames_mask )
         new(:,j,:) = (uint8(res) .* uint8(mask)) + (uint8(img) .* uint8(1-mask));
        end
        [mses(i),psnrs(i)] = errorsVideos(comparison, new, frames_mask);
+       delete(line);
+       line = plot(mses);
+       drawnow();
        beta = 1.1*beta;
-    end
-    figure;
-    plot(mses);
+    end 
     figure;
     plot(psnrs);
 end

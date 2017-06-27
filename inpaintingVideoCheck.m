@@ -1,7 +1,7 @@
 fprintf('\n ~~~~~~~Analyzing Video~~~~~~~ \n');
 frames = 300;
-% [original,imp] = loadVideo('Videos/tv.yuv',176,144,frames);
-[original,imp] = loadVideo('Videos/ducks.yuv',1280,720,frames);
+[original,imp] = loadVideo('Videos/tv.yuv',176,144,frames);
+%[original,imp] = loadVideo('Videos/ducks.yuv',1280,720,frames);
 
 original = uint8(original);
 mask = zeros([1,frames]);
