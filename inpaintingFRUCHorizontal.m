@@ -13,7 +13,7 @@ function [ new ] = inpaintingFRUCHorizontal( original, comparison, mask )
     beta = 0.3;
     myu = 3;
     itr = 100;
-    mses = zeroes(itr);
+    mses = zeros(itr);
     for i=1:1:itr,
        disp(i);
        for j=1:1:width,
