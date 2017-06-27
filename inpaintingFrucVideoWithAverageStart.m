@@ -1,4 +1,4 @@
-function [ new ] = inpaintingFrucVideoWithAverageStart( original, fps)
+function [ new ] = inpaintingFrucVideoWithAverageStart( original, fps, comparison, frames_mask)
     [height,width,original_frame_rate] = size(original);
     frames = 2*original_frame_rate;
     corrupted = averageFRUC(original);
@@ -13,11 +13,24 @@ function [ new ] = inpaintingFrucVideoWithAverageStart( original, fps)
     for i=1:1:frames,
        mov(i) = mov_struct; 
     end
-    itr = 3;
-    for i=40*itr:1:49*itr,
+    itr = 2;
+    mses = 0;
+    psnrs = zeros([itr,1]);
+    figure;
+    hold on;
+    line = plot(mses);
+    loc = 1;
+    for i=47*itr:1:49*itr,
        disp(i);
        res = hevc_x265_video_compression_decompression(uint8(prev), mov,51 - floor(i/itr), 'inpaintedMovie',fps,frames);
        prev = (uint8(res) .* uint8(mask)) + (uint8(corrupted).*uint8(1-mask));
+       [mses(loc),psnrs(loc)] = errorsVideos(comparison, prev, frames_mask);
+       loc = loc + 1;
+       delete(line);
+       line = plot(mses);
+       drawnow();
     end
     new = prev;
+    figure;
+    plot(psnrs);
 end
