@@ -11,15 +11,9 @@ function [ new ] = inpaintingFRUCHorizontal( original )
     end
     end
     for i=1:1:width,
+        disp(i);
         img = permute(new(:,i,:),[1 3 2]);
         inpainted = inpaintingWithShifts(img,mask,3);
-        
-        if i == 100
-        figure;
-        imshow(img,[0 255]);
-        figure;
-        imshow(inpainted,[0 255]);
-        end
         new(:,i,:) = inpainted;
     end
 

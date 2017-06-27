@@ -26,9 +26,9 @@ end
 % imshow(mask,[0 1]);
 
 %Uncomment Here Your Desired Pattern
-%pattern = Horizontalpasses;
+pattern = Horizontalpasses;
 %  pattern = Verticalpasses;
- pattern = mask;
+% pattern = mask;
 
  figure;
  imshow(x,[0 255]);
@@ -37,11 +37,11 @@ end
 %  imshow(pattern,[0 1]);
 
  corrupted = x .* (ones(size(x))-pattern);
-%  figure;
-%  imshow(corrupted,[0 255]);
+  figure;
+  imshow(corrupted,[0 255]);
 result1 = inpainting(uint8(corrupted),pattern,2);
  figure;
- imshow(result1,[0 255]);
+  imshow(result1,[0 255]);
 result2 = inpaintingWithShifts(uint8(corrupted),pattern,2);
  figure;
  imshow(result2,[0 255]);
@@ -52,4 +52,4 @@ result2 = inpaintingWithShifts(uint8(corrupted),pattern,2);
    
  fprintf('With Shift \n');
  fprintf('The Mse is: %d \n',immse(uint8(x),uint8(result2)));
-  fprintf('The PSNR is: %d \n',psnr(uint8(x),uint8(result2),255));
+ fprintf('The PSNR is: %d \n',psnr(uint8(x),uint8(result2),255));

@@ -11,6 +11,7 @@ function [ new ] = inpaintingFRUCVertical( original )
     end
     end
     for i=1:1:height,
+        disp(i);
         img = permute(new(i,:,:),[2 3 1]);
         inpainted = inpainting(img,mask,1);
         new(i,:,:) = inpainted;

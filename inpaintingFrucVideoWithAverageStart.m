@@ -13,8 +13,10 @@ function [ new ] = inpaintingFrucVideoWithAverageStart( original, fps)
     for i=1:1:frames,
        mov(i) = mov_struct; 
     end
-    for i=0:1:49,
-       res = hevc_x265_video_compression_decompression(uint8(prev), mov,51 - floor(i), 'inpaintedMovie',fps,frames);
+    itr = 3;
+    for i=40*itr:1:49*itr,
+       disp(i);
+       res = hevc_x265_video_compression_decompression(uint8(prev), mov,51 - floor(i/itr), 'inpaintedMovie',fps,frames);
        prev = (uint8(res) .* uint8(mask)) + (uint8(corrupted).*uint8(1-mask));
     end
     new = prev;

@@ -13,7 +13,7 @@ function [ restored ] = inpaintingWithShifts( corrupted, mask ,myu)
        end
        prev = (uint8(sum./count) .* uint8(mask)) + (uint8(corrupted).*uint8(1-mask));
        beta = 1.1*beta;
-    end
+%     end
     restored = prev;
 end
 

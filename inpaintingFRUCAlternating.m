@@ -23,18 +23,22 @@ function [ new ] = inpaintingFRUCAlternating( original )
     
     
     beta = 0.001;
+    for i = 1:1:40,
+        beta = beta*1.1;
+    end;
     new = corrupted;
-    for i=1:1:50,
+    for i=40:1:50,
+        disp(i);
         for j=1:1:height,
             img = permute(new(j,:,:),[2 3 1]);
             res = compressDecompress(uint8(img),i,max((2*myu)/beta,1));
-            new(j,:,:) = (uint8(res) .* uint8(maskW)) + permute(uint8(corrupted(j,:,:)),[2 3 1]);
+            new(j,:,:) = (uint8(res) .* uint8(maskW)) + (permute(uint8(corrupted(j,:,:)),[2 3 1]) .* uint8(1-maskW));
         end
         
        for j=1:1:width,
             img = permute(new(:,j,:),[1 3 2]);
             res = compressDecompress(uint8(img),i,max((2*myu)/beta,1));
-            new(:,j,:) = (uint8(res) .* uint8(maskH)) + permute(uint8(corrupted(:,j,:)),[1 3 2]);
+            new(:,j,:) = (uint8(res) .* uint8(maskH)) + (permute(uint8(corrupted(:,j,:)),[1 3 2]) .* uint8(1-maskH));
        end
        
        beta = 1.1*beta;
