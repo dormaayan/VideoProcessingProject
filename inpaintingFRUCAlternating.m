@@ -1,5 +1,4 @@
-function [ new ] = inpaintingFRUCAlternating( original )
-    myu = 1;
+function [ new ] = inpaintingFRUCAlternating( original , comparison, frames_mask )
     [height,width,original_frame_rate] = size(original);
     corrupted = averageFRUC(original);
     
@@ -21,13 +20,14 @@ function [ new ] = inpaintingFRUCAlternating( original )
     end
     end
     
-    
-    beta = 0.001;
-    for i = 1:1:40,
-        beta = beta*1.1;
-    end;
+    myu = 3;
+    beta = 0.3;
     new = corrupted;
-    for i=40:1:50,
+    [mses(1),psnrs(1)] = errorsVideos(comparison, new, frames_mask);
+    figure;
+    hold on;
+    line = plot(mses);
+    for i=1:1:30,
         disp(i);
         for j=1:1:height,
             img = permute(new(j,:,:),[2 3 1]);
@@ -41,8 +41,15 @@ function [ new ] = inpaintingFRUCAlternating( original )
             new(:,j,:) = (uint8(res) .* uint8(maskH)) + (permute(uint8(corrupted(:,j,:)),[1 3 2]) .* uint8(1-maskH));
        end
        
+       [mses(i+1),psnrs(i+1)] = errorsVideos(comparison, new, frames_mask);
+       delete(line);
+       line = plot(mses);
+       drawnow();
        beta = 1.1*beta;
     end
+    
+    figure;
+    plot(psnrs);
 end
 
 

@@ -14,12 +14,11 @@ function [ new ] = inpaintingFrucVideoWithAverageStart( original, fps, compariso
        mov(i) = mov_struct; 
     end
     itr = 2;
-    mses = 0;
-    psnrs = zeros([itr,1]);
+    [mses(1),psnrs(1)] = errorsVideos(comparison, prev, frames_mask);
     figure;
     hold on;
     line = plot(mses);
-    loc = 1;
+    loc = 2;
     for i=47*itr:1:49*itr,
        disp(i);
        res = hevc_x265_video_compression_decompression(uint8(prev), mov,51 - floor(i/itr), 'inpaintedMovie',fps,frames);
