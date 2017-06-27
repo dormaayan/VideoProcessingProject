@@ -1,4 +1,4 @@
-function [ new ] = inpaintingFRUCHorizontal( original, comparison, frames_mask )
+function [ new , mses, psnrs] = inpaintingFRUCHorizontal( original, comparison, frames_mask )
     [height,width,original_frame_rate] = size(original);
     new = averageFRUC(original);
     

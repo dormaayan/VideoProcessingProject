@@ -1,4 +1,4 @@
-function [ new ] = inpaintingFrucVideoWithAverageStart( original, fps, comparison, frames_mask)
+function [ new , mses, psnrs] = inpaintingFrucVideoWithAverageStart( original, fps, comparison, frames_mask)
     [height,width,original_frame_rate] = size(original);
     frames = 2*original_frame_rate;
     corrupted = averageFRUC(original);
