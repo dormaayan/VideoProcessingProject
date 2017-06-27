@@ -13,7 +13,7 @@ function [ new ] = inpaintingFRUCHorizontal( original )
     for i=1:1:width,
         disp(i);
         img = permute(new(:,i,:),[1 3 2]);
-        inpainted = inpaintingWithShifts(img,mask,3);
+        inpainted = inpainting(img,mask,0.3);
         new(:,i,:) = inpainted;
     end
 

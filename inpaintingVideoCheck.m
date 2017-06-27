@@ -9,9 +9,9 @@ end
 filtered = original(:,:,1:2:frames);
   %new_inpainting_vid = duplicateFRUC(filtered,2);
   %new_inpainting_vid = averageFRUC(filtered);
- %new_inpainting_vid = inpaintingFRUCHorizontal(filtered);
+ new_inpainting_vid = inpaintingFRUCHorizontal(filtered);
  %new_inpainting_vid = inpaintingFRUCVertical(filtered);
- new_inpainting_vid = inpaintingFRUCAlternating(filtered);
+ %new_inpainting_vid = inpaintingFRUCAlternating(filtered);
 %new_inpainting_vid = inpaintingFrucVideoWithAverageStart( original, 50);
 figure;
 imshow(new_inpainting_vid(:,:,164),[0 255]);
