@@ -1,12 +1,12 @@
 fprintf('\n ~~~~~~~Analyzing Tv Video~~~~~~~ \n');
-[original,imp] = loadVideo('Videos/tv.yuv',176,144,300);
+frames = 300;
+[original,imp] = loadVideo('Videos/tv.yuv',176,144,frames);
 original = uint8(original);
-mask = zeros([1,300]);
-%for duplicate change loop to i=1:2:300
-for i=2:2:300
+mask = zeros([1,frames]);
+for i=2:2:frames
     mask(i)=1;
 end
-filtered = original(:,:,2:2:300);
+filtered = original(:,:,1:2:frames);
   %new_inpainting_vid = duplicateFRUC(filtered,2);
   %new_inpainting_vid = averageFRUC(filtered);
  %new_inpainting_vid = inpaintingFRUCHorizontal(filtered);
