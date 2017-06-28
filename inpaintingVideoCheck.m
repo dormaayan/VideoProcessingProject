@@ -4,13 +4,10 @@ frames = 300;
 %[original,imp] = loadVideo('Videos/ducks.yuv',1280,720,frames);
 
 original = uint8(original);
-mask = zeros([1,frames]);
-for i=2:2:frames
-    mask(i)=1;
-end
+mask = 2:2:frames;
 filtered = original(:,:,1:2:frames);
-  %new_inpainting_vid = duplicateFRUC(filtered,2);
-  %new_inpainting_vid = averageFRUC(filtered);
+  new_inpainting_vid = duplicateFRUC(filtered,2);
+ %new_inpainting_vid = averageFRUC(filtered);
  %[new_inpainting_vid,mses,psnrs] = inpaintingFRUCHorizontal(filtered, original, mask);
  %[new_inpainting_vid,mses,psnrs] = inpaintingFRUCVertical(filtered, original, mask);
  %[new_inpainting_vid,mses,psnrs] = inpaintingFRUCAlternating(filtered, original, mask);
