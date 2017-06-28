@@ -31,5 +31,5 @@ function [ new , mses, psnrs] = inpaintingFrucVideoWithAverageStart( original, f
     end
     new = prev;
     figure;
-    plot(psnrs);
+    plot(0:1:length(psnrs)-1,psnrs);
 end

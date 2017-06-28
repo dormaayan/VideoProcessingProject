@@ -50,7 +50,7 @@ function [ new, mses, psnrs ] = inpaintingFRUCAlternating( original , comparison
     end
     
     figure;
-    plot(psnrs);
+    plot(0:1:length(psnrs)-1,psnrs);
 end
 
 

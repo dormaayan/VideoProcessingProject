@@ -31,6 +31,6 @@ function [ new , mses, psnrs] = inpaintingFRUCHorizontal( original, comparison, 
        beta = 1.1*beta;
     end 
     figure;
-    plot(psnrs);
+    plot(0:1:length(psnrs)-1,psnrs);
 end
 
