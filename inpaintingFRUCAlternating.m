@@ -22,12 +22,13 @@ function [ new, mses, psnrs ] = inpaintingFRUCAlternating( original , comparison
     
     myu = 3;
     beta = 0.3;
+    itr = 30;
     new = corrupted;
     [mses(1),psnrs(1)] = errorsVideos(comparison, new, frames_mask);
     figure;
     hold on;
-    line = plot(mses);
-    for i=1:1:30,
+    line = plot(0,mses);
+    for i=1:1:itr,
         disp(i);
         for j=1:1:height,
             img = permute(new(j,:,:),[2 3 1]);
@@ -43,7 +44,7 @@ function [ new, mses, psnrs ] = inpaintingFRUCAlternating( original , comparison
        
        [mses(i+1),psnrs(i+1)] = errorsVideos(comparison, new, frames_mask);
        delete(line);
-       line = plot(mses);
+       line = plot(0:1:length(mses)-1,mses);
        drawnow();
        beta = 1.1*beta;
     end

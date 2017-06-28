@@ -16,7 +16,7 @@ function [ new, mses, psnrs ] = inpaintingFRUCVertical( original , comparison, f
     [mses(1),psnrs(1)] = errorsVideos(comparison, new, frames_mask);
     figure;
     hold on;
-    line = plot(mses);
+    line = plot(0,mses);
     for i=1:1:itr,
        disp(i);
        for j=1:1:height,
@@ -26,7 +26,7 @@ function [ new, mses, psnrs ] = inpaintingFRUCVertical( original , comparison, f
        end
        [mses(i+1),psnrs(i+1)] = errorsVideos(comparison, new, frames_mask);
        delete(line);
-       line = plot(mses);
+       line = plot(0:1:length(mses)-1,mses);
        drawnow();
        beta = 1.1*beta;
     end 
