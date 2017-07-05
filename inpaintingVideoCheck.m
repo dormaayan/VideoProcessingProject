@@ -26,9 +26,9 @@ fprintf('\n The Mse is: %d \n',mse);
 fprintf('\n The PSNR is: %d \n',res_psnr);
 
 
-[new_inpainting_vid,mses,psnrs] = inpaintingFRUCHorizontal(filtered, original, mask);
+%[new_inpainting_vid,mses,psnrs] = inpaintingFRUCHorizontal(filtered, original, mask);
 %[new_inpainting_vid,mses,psnrs] = inpaintingFRUCVertical(filtered, original, mask);
-%[new_inpainting_vid,mses,psnrs] = inpaintingFRUCAlternating(filtered, original, mask);
+[new_inpainting_vid,mses,psnrs] = inpaintingFRUCAlternating(filtered, original, mask);
 %[new_inpainting_vid,mses,psnrs] = inpaintingFrucVideoWithAverageStart( filtered, 50, original, mask);
 % figure;
 % imshow(new_inpainting_vid(:,:,164),[0 255]);

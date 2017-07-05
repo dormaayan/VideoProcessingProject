@@ -22,19 +22,14 @@ function [ new, mses, psnrs ] = inpaintingFRUCAlternating( original , comparison
     
     myu = 3;
     beta = 0.3;
-    itr = 30;
+    itr = 50;
     new = corrupted;
     [mses(1),psnrs(1)] = errorsVideos(comparison, new, frames_mask);
     figure;
     hold on;
-<<<<<<< HEAD
-    line = plot(mses);
-    for i=1:1:50,
-=======
     line = plot(0,mses);
     for i=1:1:itr,
->>>>>>> d1f79986ffcdc52c4224b3931ef4cef28bf1cd38
-        disp(i);
+        %disp(i);
         for j=1:1:height,
             img = permute(new(j,:,:),[2 3 1]);
             res = compressDecompress(uint8(img),i,max((2*myu)/beta,1));
