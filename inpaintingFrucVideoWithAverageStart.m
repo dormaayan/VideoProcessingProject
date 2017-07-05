@@ -17,7 +17,7 @@ function [ new , mses, psnrs] = inpaintingFrucVideoWithAverageStart( original, f
     [mses(1),psnrs(1)] = errorsVideos(comparison, prev, frames_mask);
     figure;
     hold on;
-    line = plot(mses);
+    line = plot(0,mses);
     loc = 2;
     for i=47*itr:1:49*itr,
        disp(i);
@@ -26,10 +26,10 @@ function [ new , mses, psnrs] = inpaintingFrucVideoWithAverageStart( original, f
        [mses(loc),psnrs(loc)] = errorsVideos(comparison, prev, frames_mask);
        loc = loc + 1;
        delete(line);
-       line = plot(mses);
+       line = plot(0:1:length(mses)-1,mses);
        drawnow();
     end
     new = prev;
     figure;
-    plot(psnrs);
+    plot(0:1:length(psnrs)-1,psnrs);
 end
