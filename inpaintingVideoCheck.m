@@ -3,11 +3,15 @@ fprintf('\n ~~~~~~~Analyzing Video~~~~~~~ \n');
 % frames = 300;
 % [original,imp] = loadVideo('Videos/tv.yuv',176,144,frames);
 
- frames = 300;
-[original,imp] = loadVideo('Videos/coastguard.yuv',176,144,frames);
+%  frames = 300;
+% [original,imp] = loadVideo('Videos/coastguard.yuv',176,144,frames);
 
-%  frames = 500;
-% [original,imp] = loadVideo('Videos/ducks.yuv',1280,720,frames);
+%  frames = 300;
+% [original,imp] = loadVideo('Videos/bowing.yuv',176,144,frames);
+
+
+ frames = 500;
+[original,imp] = loadVideo('Videos/ducks.yuv',1280,720,frames);
 
 %  frames = 500;
 % [original,imp] = loadVideo('Videos/park.yuv',1280,720,frames);
@@ -26,7 +30,7 @@ fprintf('\n The Mse is: %d \n',mse);
 fprintf('\n The PSNR is: %d \n',res_psnr);
 
 
-%[new_inpainting_vid,mses,psnrs] = inpaintingFRUCHorizontal(filtered, original, mask);
+% [new_inpainting_vid,mses,psnrs] = inpaintingFRUCHorizontal(filtered, original, mask);
 %[new_inpainting_vid,mses,psnrs] = inpaintingFRUCVertical(filtered, original, mask);
 [new_inpainting_vid,mses,psnrs] = inpaintingFRUCAlternating(filtered, original, mask);
 %[new_inpainting_vid,mses,psnrs] = inpaintingFrucVideoWithAverageStart( filtered, 50, original, mask);
