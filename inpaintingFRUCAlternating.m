@@ -27,7 +27,7 @@ function [ new, mses, psnrs ] = inpaintingFRUCAlternating( original , comparison
     figure;
     hold on;
     line = plot(mses);
-    for i=1:1:30,
+    for i=1:1:50,
         disp(i);
         for j=1:1:height,
             img = permute(new(j,:,:),[2 3 1]);

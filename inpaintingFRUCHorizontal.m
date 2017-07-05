@@ -12,13 +12,13 @@ function [ new , mses, psnrs] = inpaintingFRUCHorizontal( original, comparison, 
     end
     beta = 0.3;
     myu = 3;
-    itr = 10;
+    itr = 50;
     [mses(1),psnrs(1)] = errorsVideos(comparison, new, frames_mask);
     figure;
     hold on;
     line = plot(mses);
     for i=1:1:itr,
-       disp(i);
+%        disp(i);
        for j=1:1:width,
         img = permute(new(:,j,:),[1 3 2]);
         res = compressDecompress(uint8(img),i,max((2*myu)/beta,1));

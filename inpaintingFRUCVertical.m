@@ -12,13 +12,13 @@ function [ new, mses, psnrs ] = inpaintingFRUCVertical( original , comparison, f
     end
     beta = 0.3;
     myu = 3;
-    itr = 10;
+    itr = 50;
     [mses(1),psnrs(1)] = errorsVideos(comparison, new, frames_mask);
     figure;
     hold on;
     line = plot(mses);
     for i=1:1:itr,
-       disp(i);
+       %disp(i);
        for j=1:1:height,
         img = permute(new(j,:,:),[2 3 1]);
         res = compressDecompress(uint8(img),i,max((2*myu)/beta,1));
@@ -28,7 +28,7 @@ function [ new, mses, psnrs ] = inpaintingFRUCVertical( original , comparison, f
        delete(line);
        line = plot(mses);
        drawnow();
-       beta = 1.1*beta;
+       beta = 1.05*beta;
     end 
     figure;
     plot(psnrs);
