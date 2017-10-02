@@ -20,8 +20,8 @@ function [ new, mses, psnrs ] = inpaintingFRUCAlternating( original , comparison
     end
     end
     
-    myu = 3;
-    beta = 0.3;
+    myu = 2;
+    beta = 0.04;
     itr = 50;
     new = corrupted;
     [mses(1),psnrs(1)] = errorsVideos(comparison, new, frames_mask);
