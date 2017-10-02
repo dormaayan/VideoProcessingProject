@@ -26,9 +26,9 @@ end
 % imshow(mask,[0 1]);
 
 %Uncomment Here Your Desired Pattern
-pattern = Horizontalpasses;
+% pattern = Horizontalpasses;
 %  pattern = Verticalpasses;
-% pattern = mask;
+pattern = mask;
 
  figure;
  imshow(x,[0 255]);
