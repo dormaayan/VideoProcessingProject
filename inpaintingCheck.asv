@@ -1,6 +1,6 @@
 load('lena_1.mat');
 Horizontalpasses = zeros(512,512);
-for i=1:1:511
+for i=1:1:512
     for j=1:1:512
         if mod(i,4)<1
             Horizontalpasses(i,j)=1;
@@ -45,18 +45,18 @@ pattern = Horizontalpasses;
 % result2 = inpaintingWithShifts(corrupted,pattern);
 %  figure;
 %  imshow(result2,[0 255]);
-%  result3 = inpaintingLinesAveraging(corrupted,pattern);
-%  figure;
-%  imshow(result3,[0 255]);
+ result3 = inpaintingLinesAveraging(corrupted,pattern);
+ figure;
+ imshow(result3,[0 255]);
  
 %  fprintf('No Shift \n');
-%  fprintf('The Mse is: %d \n',immse(x,result1));
-%   fprintf('The PSNR is: %d \n',psnr_mask(x,result1,pattern));
+%  fprintf('The Mse is: %d \n',immse(uint8(x),uint8(result1)));
+%   fprintf('The PSNR is: %d \n',psnr(uint8(x),uint8(result1),255));
    
- fprintf('With Shift \n');
- fprintf('The Mse is: %.2f \n',immse(x,result2));
- fprintf('The PSNR is: %.2f \n',psnr_mask(x,result2,pattern));
+%  fprintf('With Shift \n');
+%  fprintf('The Mse is: %d \n',immse(uint8(x),uint8(result2)));
+%  fprintf('The PSNR is: %d \n',psnr(uint8(x),uint8(result2),255));
 
  fprintf('With averaging of lines \n');
- fprintf('The Mse is: %.2f \n',immse(x,result3));
- fprintf('The PSNR is: %.2f \n',psnr_mask(x,result3,pattern));
+ fprintf('The Mse is: %d \n',immse(uint8(x),uint8(result3)));
+ fprintf('The PSNR is: %d \n',psnr(uint8(x),uint8(result3),255));
