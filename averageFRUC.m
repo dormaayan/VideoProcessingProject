@@ -7,9 +7,9 @@ function [ new_video ] = averageFRUC(video)
 
     for i=1:1:new_frame_rate-1
         if mod(i,2)==1
-            new_video(:,:,i) = video(:,:,uint8(i/2));
+            new_video(:,:,i) = video(:,:,round(i/2));
         else
-            new_video(:,:,i) = uint8((uint16(video(:,:,uint32(i/2)))+uint16(video(:,:,uint32(i/2)+1)))/2);
+            new_video(:,:,i) = (video(:,:,floor(i/2))+video(:,:,floor(i/2)+1))/2;
         end
     end
     new_video(:,:,new_frame_rate) = video(:,:,original_frame_rate);

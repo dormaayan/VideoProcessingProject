@@ -1,6 +1,5 @@
-
-function [ mse,psnrErr ] = errorsVideos( origin, restored, mask)
-mse = immse(uint8(origin(:,:,mask)),uint8(restored(:,:,mask)));
-psnrErr = psnr(uint8(origin(:,:,mask)),uint8(restored(:,:,mask)));
+function [ psnrErr ] = errorsVideos( origin, restored, mask)
+[h,w,~] = size(origin);
+psnrErr = psnr_mask(origin(:,:,mask),restored(:,:,mask),ones(h,w));
 end
 
