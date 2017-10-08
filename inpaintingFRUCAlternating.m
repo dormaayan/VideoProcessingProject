@@ -1,56 +1,45 @@
-function [ new, mses, psnrs ] = inpaintingFRUCAlternating( original , comparison, frames_mask )
+function [ new,psnrs ] = inpaintingFRUCAlternating( original , graph, comparison )
+    
     [height,width,original_frame_rate] = size(original);
-    corrupted = averageFRUC(original);
-    
-    maskW = zeros(width,2*original_frame_rate);
-    for i=1:1:width
-    for j=1:1:2*original_frame_rate
-        if mod(j,2)<1
-            maskW(i,j)=1;
-        end 
-    end
-    end
-    
-    maskH = zeros(height,2*original_frame_rate);
-    for i=1:1:height
-    for j=1:1:2*original_frame_rate
-        if mod(j,2)<1
-            maskH(i,j)=1;
-        end 
-    end
-    end
-    
-    myu = 2;
-    beta = 0.04;
+    avareged = averageFRUC(original);
+    new = avareged;
     itr = 50;
-    new = corrupted;
-    [mses(1),psnrs(1)] = errorsVideos(comparison, new, frames_mask);
-    figure;
-    hold on;
-    line = plot(0,mses);
+
+    frames_mask = 2:2:original_frame_rate*2;
+
+    maskW = initialize_mask(width, original_frame_rate);
+    
+    maskH = initialize_mask(height, original_frame_rate);
+    
+
+if graph,
+    psnrs(1) = errorsVideos(comparison, new, frames_mask);
+    line = initialize_psnr_graph(psnrs);
+end
+
     for i=1:1:itr,
         %disp(i);
         for j=1:1:height,
             img = permute(new(j,:,:),[2 3 1]);
-            res = compressDecompress(uint8(img),i,max((2*myu)/beta,1));
-            new(j,:,:) = (uint8(res) .* uint8(maskW)) + (permute(uint8(corrupted(j,:,:)),[2 3 1]) .* uint8(1-maskW));
+            corrupted = permute(avareged(j,:,:),[2 3 1]);
+            new(j,:,:) = inpainting_iteration(img, corrupted, maskW, shifts, starting_qb - floor(i/itr));
         end
         
        for j=1:1:width,
             img = permute(new(:,j,:),[1 3 2]);
-            res = compressDecompress(uint8(img),i,max((2*myu)/beta,1));
-            new(:,j,:) = (uint8(res) .* uint8(maskH)) + (permute(uint8(corrupted(:,j,:)),[1 3 2]) .* uint8(1-maskH));
+            corrupted = permute(avareged(:,j,:),[1 3 2]);
+            new(:,j,:) = inpainting_iteration(img, corrupted, maskH, shifts, starting_qb - floor(i/itr));
        end
-       
-       [mses(i+1),psnrs(i+1)] = errorsVideos(comparison, new, frames_mask);
-       delete(line);
-       line = plot(0:1:length(mses)-1,mses);
-       drawnow();
-       beta = 1.1*beta;
+     
+       if graph,
+        psnrs(i+1) = errorsVideos(comparison, new, frames_mask);
+        line = update_psnr_graph(psnrs,line);
+       end
+    end
+        
     end
     
-    figure;
-    plot(0:1:length(psnrs)-1,psnrs);
-end
+    
+   
 
 
