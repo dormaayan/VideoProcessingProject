@@ -2,7 +2,7 @@ function [ new, psnrs] = inpaintingFRUCHorizontal( original, graph, comparison )
 %parameters for the algorithm.
 shifts = 3;
 itr = 3;
-starting_qb = 37;
+starting_qb = 30;
 
 avareged = averageFRUC(original);
 new = avareged;

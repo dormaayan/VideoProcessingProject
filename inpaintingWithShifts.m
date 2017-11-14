@@ -6,7 +6,7 @@ starting_qb = 37;
 
 mask = double(mask);
 corrupted = double(corrupted);
-%prev = double(128*mask + corrupted .* (1-mask));
+% prev = double(128*mask + corrupted .* (1-mask));
 prev = inpaintingLinesAveraging(corrupted,mask);
 
 if graph,

@@ -4,7 +4,7 @@ load('lena_1.mat');
 Horizontalpasses = zeros(h,w);
 for i=1:1:h
     for j=1:1:w
-        if mod(i,4)<1
+        if mod(i,2)<1
             Horizontalpasses(i,j)=1;
         end 
     end
@@ -47,9 +47,9 @@ pattern = Horizontalpasses;
 result2 = inpaintingWithShifts(corrupted,pattern, true, x);
  figure;
  imshow(result2,[0 255]);
- result3 = inpaintingLinesAveraging(corrupted,pattern);
- figure;
- imshow(result3,[0 255]);
+%  result3 = inpaintingLinesAveraging(corrupted,pattern);
+%  figure;
+%  imshow(result3,[0 255]);
  
 %  fprintf('No Shift \n');
 %   fprintf('The PSNR is: %d \n',psnr_mask(x,result1,pattern));
@@ -57,5 +57,5 @@ result2 = inpaintingWithShifts(corrupted,pattern, true, x);
  fprintf('With Shift \n');
  fprintf('The PSNR is: %.2f \n',psnr_mask(x,result2,pattern));
 
- fprintf('With averaging of lines \n');
- fprintf('The PSNR is: %.2f \n',psnr_mask(x,result3,pattern));
+%  fprintf('With averaging of lines \n');
+%  fprintf('The PSNR is: %.2f \n',psnr_mask(x,result3,pattern));
