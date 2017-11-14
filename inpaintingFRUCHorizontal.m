@@ -18,11 +18,15 @@ if graph,
 end
 
 for i=1:1:starting_qb*itr,
-    for j=1:1:width,
-        img = permute(new(:,j,:),[1 3 2]);
-        corrupted = permute(avareged(:,j,:),[1 3 2]);
-        new(:,j,:) = inpainting_iteration(img, corrupted, mask, shifts, starting_qb - floor(i/itr));
-    end
+%     for j=1:1:width,
+%         img = permute(new(:,j,:),[1 3 2]);
+%         corrupted = permute(avareged(:,j,:),[1 3 2]);
+%         new(:,j,:) = inpainting_iteration(img, corrupted, mask, shifts, starting_qb - floor(i/itr));
+%     end
+    
+    mirrored_vid = permute(new,[1 3 2]);
+    new = video_inpainting_iteration(mirrored_vid, corrupted, mask, shifts, starting_qb - floor(i/itr));
+    new = permute(new,[1 3 2]);
     
     if graph,
         psnrs(i+1) = errorsVideos(comparison, new, frames_mask);
