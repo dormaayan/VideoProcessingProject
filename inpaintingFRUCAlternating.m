@@ -1,38 +1,29 @@
 function [ new,psnrs ] = inpaintingFRUCAlternating( original , graph, comparison )
 
-[height,width,original_frame_rate] = size(original);
-avareged = averageFRUC(original);
-new = avareged;
+%parameters for the algorithm.
 shifts = 3;
 itr = 3;
 starting_qb = 30;
 
+avareged = averageFRUC(original);
+new = avareged;
+
+[height,width,original_frame_rate] = size(original);
+
 frames_mask = 2:2:original_frame_rate*2;
-
-maskW = initialize_mask(width, original_frame_rate);
-
-maskH = initialize_mask(height, original_frame_rate);
-
 
 if graph,
     psnrs(1) = errorsVideos(comparison, new, frames_mask);
     line = initialize_psnr_graph(psnrs);
 end
 
+Hpermutation = [1 3 2];
+Vpermutation = [3 2 1];
+
 for i=1:1:starting_qb*itr,
-    if mod(i,2) == 0,
-        for j=1:1:height,
-            img = permute(new(j,:,:),[2 3 1]);
-            corrupted = permute(avareged(j,:,:),[2 3 1]);
-            new(j,:,:) = inpainting_iteration(img, corrupted, maskW, shifts, starting_qb - floor(i/itr));
-        end
-    else
-        for j=1:1:width,
-            img = permute(new(:,j,:),[1 3 2]);
-            corrupted = permute(avareged(:,j,:),[1 3 2]);
-            new(:,j,:) = inpainting_iteration(img, corrupted, maskH, shifts, starting_qb - floor(i/itr));
-        end
-    end
+    
+    new = video_inpainting_iteration(new, avareged, mask, shifts, starting_qb - floor(i/itr),Hpermutation);
+    new = video_inpainting_iteration(new, avareged, mask, shifts, starting_qb - floor(i/itr),Vpermutation);
     
     if graph,
         psnrs(i+1) = errorsVideos(comparison, new, frames_mask);

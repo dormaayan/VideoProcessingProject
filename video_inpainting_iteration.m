@@ -1,5 +1,7 @@
-function [ next ] = video_inpainting_iteration( prev, corrupted, mask, shifts, qb)
+function [ next ] = video_inpainting_iteration( prev, corrupted, mask, shifts, qb, permutation)
 
+prev = permute(prev, permutation);
+corrupted = permutre(corrupted, permutation);
 [h,w,fr] = size(prev);
 sum = double(zeros(size(prev)));
 count = zeros(size(prev));
@@ -18,6 +20,7 @@ for j=0:1:Nb-1,
 end
 
 next = ((sum./count) .* mask) + (corrupted.*(1-mask));
+next = permutre(next, permutation);
 
 end
 

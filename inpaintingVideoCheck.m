@@ -20,15 +20,15 @@ mask = 2:2:frames;
 filtered = original(:,:,1:2:frames);
 
 
-% % new_inpainting_vid = duplicateFRUC(filtered,2);
-% new_inpainting_vid = averageFRUC(filtered);
-% res_psnr = errorsVideos(original,new_inpainting_vid,mask);
-% fprintf('\n Base Results \n');
-% fprintf('\n The PSNR is: %.2f \n',res_psnr);
+% new_inpainting_vid = duplicateFRUC(filtered,2);
+new_inpainting_vid = averageFRUC(filtered);
+res_psnr = errorsVideos(original,new_inpainting_vid,mask);
+fprintf('\n Base Results \n');
+fprintf('\n The PSNR is: %.2f \n',res_psnr);
 
 
-[new_inpainting_vid,psnrs] = inpaintingFRUCHorizontal(filtered, true, original);
- %[new_inpainting_vid,psnrs] = inpaintingFRUCVertical(filtered, true, original);
+[new_inpainting_vid,psnrs] = inpaintingFRUCOneWay(filtered, true, original, [1 3 2]);
+ %[new_inpainting_vid,psnrs] = inpaintingFRUCOneWay(filtered, true, original, [3 2 1]);
 % [new_inpainting_vid,psnrs] = inpaintingFRUCAlternating(filtered, true, original);
 % [new_inpainting_vid,mses,psnrs] = inpaintingFrucVideoWithAverageStart( filtered, 2, original, mask);
 res_psnr = errorsVideos(original,new_inpainting_vid,mask);
