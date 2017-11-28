@@ -19,6 +19,7 @@ end
 
 Hpermutation = [1 3 2];
 Vpermutation = [3 2 1];
+mask = initialize_mask(height, width, original_frame_rate);
 
 for i=1:1:starting_qb*itr,
     

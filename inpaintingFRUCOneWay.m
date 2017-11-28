@@ -16,7 +16,7 @@ if graph,
     line = initialize_psnr_graph(psnrs);
 end
 
-mask = permute(initialize_mask(height, width, original_frame_rate),permutation);
+mask = initialize_mask(height, width, original_frame_rate);
 
 for i=1:1:starting_qb*itr,
     
