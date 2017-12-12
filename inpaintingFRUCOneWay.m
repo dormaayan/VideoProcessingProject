@@ -1,8 +1,4 @@
-function [ new, psnrs] = inpaintingFRUCOneWay( original, graph, comparison, permutation )
-%parameters for the algorithm.
-shifts = 3;
-itr = 3;
-starting_qb = 30;
+function [ new, psnrs] = inpaintingFRUCOneWay( original, graph, comparison, permutation, shifts, itr, starting_qb )
 
 avareged = averageFRUC(original);
 new = avareged;
