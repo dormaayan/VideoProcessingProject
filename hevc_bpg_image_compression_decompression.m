@@ -12,8 +12,8 @@ temp_reconstructed_filename = sprintf( 'C:\\Users\\Niv\\Documents\\GitHub\\Video
 
 %encoderDirectory = 'Y:\\bpg'; 
 encoderDirectory = 'C:\\Users\\Niv\\Documents\\GitHub\\VideoProcessingProject\\mybpg'; 
-[dontcare1, dontcare2] = system( sprintf('%s\\bpgenc.exe -q %d -o %s  %s', encoderDirectory, compression_QP, compressed_file, temp_input_filename ) );
-[dontcare1, dontcare2] = system( sprintf('%s\\bpgdec.exe -o %s  %s', encoderDirectory, temp_reconstructed_filename, compressed_file ) );
+[~, ~] = system( sprintf('%s\\bpgenc.exe -q %d -o %s  %s', encoderDirectory, compression_QP, compressed_file, temp_input_filename ) );
+[~, ~] = system( sprintf('%s\\bpgdec.exe -o %s  %s', encoderDirectory, temp_reconstructed_filename, compressed_file ) );
 
 system( sprintf( 'del %s', temp_input_filename ) );
 system( sprintf( 'del %s', compressed_file ) );

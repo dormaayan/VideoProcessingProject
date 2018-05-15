@@ -6,6 +6,6 @@ load conversion.mat; % load conversion matrices
 yuv = double(yuv);
 
 yuv(:, 2 : 3) = yuv(:, 2 : 3) - 127;
-rgb = (yuvToRgb *yuv.').';
+rgb = yuv * yuvToRgb.';
 
 rgb = uint8(clipValue(rgb, 0, 255));
